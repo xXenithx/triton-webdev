@@ -4,6 +4,9 @@
 ### dotenv ###
 .env
 
+### firebase json files ###
+triton-dev-firebase.json
+
 ### Node ###
 # Logs
 logs
