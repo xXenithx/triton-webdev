@@ -1,4 +1,4 @@
-import 'dotenv/config';
+//import 'dotenv/config';
 import Particle from 'particle-api-js'
 import path from 'path';
 import express from 'express';
@@ -12,6 +12,8 @@ import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import firebaseAdmin from 'firebase-admin';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
+import morgan from 'morgan';
 
 // Resolve __dirname and __filename in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -54,6 +56,9 @@ app.use(session({
     cookie: { secure: false } // Set to true if using HTTPS
 }));
 
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+
+app.use(morgan('combined', { stream: accessLogStream }));
 // // Initialize Firebase Admin SDK
 // firebaseAdmin.initializeApp({
 //     credential: firebaseAdmin.credential.applicationDefault(),
@@ -108,7 +113,7 @@ app.use(passport.session());
 // Debug middleware
 app.use((req, res, next) => {
     console.log('Request URL:', req.originalUrl);
-    console.log('Session data:', req.session);
+    //console.log('Session data:', req.session);
     next();
 });
 
@@ -133,12 +138,14 @@ const isAuthenticated = (req, res, next) => {
     }
 };
 
+app.enable('trust proxy')
 app.get('/', function (req, res) {
-    console.log('Session data on /:', req.session.user);
+    //console.log('Session data on /:', req.session.user);
+    console.log("\nIncoming request from: " + req.connection.remoteAddress);
     if (req.session.user) {
         res.redirect('/protected-route');
     } else {
-        console.log('req.session.user:', req.session.user);
+        //console.log('req.session.user:', req.session.user);
         res.sendFile(path.join(__dirname, './public/home.html'));
     }
 });
