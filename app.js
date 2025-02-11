@@ -1,4 +1,4 @@
-//import 'dotenv/config';
+// import 'dotenv/config';
 import Particle from 'particle-api-js'
 import path from 'path';
 import express from 'express';
@@ -18,6 +18,8 @@ import morgan from 'morgan';
 // Resolve __dirname and __filename in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = import.meta.dirname;
+const date = new Date();
+const timestamp = date.getTime();
 
 // Import the service account key file
 import serviceAccount from './triton-dev-firebase.json' with { type: 'json' };
@@ -56,7 +58,7 @@ app.use(session({
     cookie: { secure: false } // Set to true if using HTTPS
 }));
 
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+var accessLogStream = fs.createWriteStream(path.join(__dirname, `/logs/access_${timestamp}.log`), { flags: 'a' })
 
 app.use(morgan('combined', { stream: accessLogStream }));
 // // Initialize Firebase Admin SDK
