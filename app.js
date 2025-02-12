@@ -20,9 +20,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = import.meta.dirname;
 const date = new Date();
 const timestamp = date.getTime();
+const APP_CREDENTIALS = process.env.APP_CREDENTIALS || argv.appCredentials;
 
 // Import the service account key file
-import serviceAccount from './triton-dev-firebase.json' with { type: 'json' };
+import serviceAccount from APP_CREDENTIALS with { type: 'json' };
 console.log('serviceAccount:', serviceAccount);
 // Initialize Firebase Admin SDK
 firebaseAdmin.initializeApp({
