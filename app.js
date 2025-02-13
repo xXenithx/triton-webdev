@@ -25,8 +25,8 @@ const timestamp = date.getTime();
 var key = fs.readFileSync(__dirname + '/certs/selfsigned.key');
 var cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt');
 var options = {
-  key: key,
-  cert: cert
+    key: key,
+    cert: cert
 };
 
 const serviceAccount = {
@@ -163,6 +163,18 @@ const isAuthenticated = (req, res, next) => {
 };
 
 app.enable('trust proxy')
+
+function ensureSecure(req, res, next) {
+    if (req.secure) {
+        // Request is already secure (HTTPS)
+        return next();
+    }
+    // Redirect to HTTPS version of the URL
+    res.redirect('https://' + req.hostname + req.originalUrl);
+}
+
+app.use(ensureSecure);
+
 app.get('/', function (req, res) {
     //console.log('Session data on /:', req.session.user);
     console.log("\nIncoming request from: " + req.connection.remoteAddress);
