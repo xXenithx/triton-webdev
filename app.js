@@ -1,4 +1,4 @@
-// import 'dotenv/config';
+import 'dotenv/config';
 import Particle from 'particle-api-js'
 import path from 'path';
 import express from 'express';
@@ -14,12 +14,20 @@ import firebaseAdmin from 'firebase-admin';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import morgan from 'morgan';
+import https from 'https';
 
 // Resolve __dirname and __filename in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = import.meta.dirname;
 const date = new Date();
 const timestamp = date.getTime();
+
+var key = fs.readFileSync(__dirname + '/certs/selfsigned.key');
+var cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt');
+var options = {
+  key: key,
+  cert: cert
+};
 
 const serviceAccount = {
     "type": "service_account",
@@ -69,7 +77,7 @@ app.use(session({
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Set to true if using HTTPS
+    cookie: { secure: true } // Set to true if using HTTPS
 }));
 
 var accessLogStream = fs.createWriteStream(path.join(__dirname, `/logs/access_${timestamp}.log`), { flags: 'a' })
@@ -323,6 +331,8 @@ app.get('/auth/google/callback',
     }
 );
 
-app.listen(port, function () {
+var server = https.createServer(options, app);
+
+server.listen(port, function () {
     console.log('server: http://localhost:' + port);
 });
