@@ -165,10 +165,14 @@ const isAuthenticated = (req, res, next) => {
 app.enable('trust proxy')
 
 function ensureSecure(req, res, next) {
+    console.log('isTLS: ' + req.secure);
     if (req.secure) {
         // Request is already secure (HTTPS)
+        console.log('Using secure protocol');
         return next();
     }
+    console.log('not using secure ssl, redirecting to  %s' % ('https://' + req.hostname + req.originalUrl));
+
     // Redirect to HTTPS version of the URL
     res.redirect('https://' + req.hostname + req.originalUrl);
 }
