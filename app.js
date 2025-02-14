@@ -19,8 +19,6 @@ import https from 'https';
 // Resolve __dirname and __filename in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = import.meta.dirname;
-const date = new Date();
-const timestamp = date.getTime();
 
 var key = fs.readFileSync(__dirname + '/certs/selfsigned.key');
 var cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt');
@@ -80,7 +78,9 @@ app.use(session({
     cookie: { secure: true } // Set to true if using HTTPS
 }));
 
-var accessLogStream = fs.createWriteStream(path.join(__dirname, `/logs/access_${timestamp}.log`), { flags: 'a' })
+
+
+var accessLogStream = fs.createWriteStream(path.join(__dirname, `http_access_${(new Date().toJSON().slice(0, 10))}.log`), { flags: 'a' })
 
 app.use(morgan('combined', { stream: accessLogStream }));
 // // Initialize Firebase Admin SDK
