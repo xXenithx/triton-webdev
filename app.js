@@ -80,7 +80,7 @@ app.use(session({
 
 
 
-var accessLogStream = fs.createWriteStream(path.join(__dirname, `http_access_${(new Date().toJSON().slice(0, 10))}.log`), { flags: 'a' })
+var accessLogStream = fs.createWriteStream(path.join(__dirname, `/logs/http_access_${(new Date().toJSON().slice(0, 10))}.log`), { flags: 'a' })
 
 app.use(morgan('combined', { stream: accessLogStream }));
 // // Initialize Firebase Admin SDK
