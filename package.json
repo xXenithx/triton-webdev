@@ -5,30 +5,29 @@
   },
   "type": "module",
   "dependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/preset-env": "^7.26.0",
-    "axios": "^1.6.8",
-    "babel-loader": "^9.2.1",
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "axios": "^1.8.3",
+    "babel-loader": "^10.0.0",
     "cookie-parser": "^1.4.7",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "express-session": "^1.18.1",
-    "firebase": "^11.3.0",
-    "firebase-admin": "^13.0.1",
-    "firebaseui": "^6.1.0",
+    "firebase": "^11.4.0",
+    "firebase-admin": "^13.2.0",
     "morgan": "^1.10.0",
-    "particle-api-js": "^10.6.0",
+    "particle-api-js": "^11.1.2",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "prompt-sync": "^4.2.0",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
     "yargs": "^17.7.2"
   },
   "engines": {
     "node": ">=12.14.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.9"
   }
 }
