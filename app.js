@@ -350,5 +350,5 @@ app.get('/auth/google/callback',
 var server = https.createServer(options, app);
 
 server.listen(port, function () {
-    console.log('server: http://localhost:' + port);
+    console.log('server: https://localhost:' + port);
 });
