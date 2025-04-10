@@ -7,7 +7,7 @@
   "dependencies": {
     "@babel/core": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
-    "axios": "^1.8.3",
+    "axios": "^1.8.4",
     "babel-loader": "^10.0.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
@@ -16,7 +16,6 @@
     "firebase": "^11.4.0",
     "firebase-admin": "^13.2.0",
     "morgan": "^1.10.0",
-    "particle-api-js": "^11.1.2",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "prompt-sync": "^4.2.0",

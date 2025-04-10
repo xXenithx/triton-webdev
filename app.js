@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import Particle from 'particle-api-js'
 import path from 'path';
 import express from 'express';
 import argv from 'yargs'
@@ -181,7 +180,7 @@ app.use(ensureSecure);
 
 app.get('/', function (req, res) {
     //console.log('Session data on /:', req.session.user);
-    console.log("\nIncoming request from: " + req.connection.remoteAddress);
+    console.log("\nIncoming request from: " + req.remoteAddress);
     if (req.session.user) {
         res.redirect('/protected-route');
     } else {
@@ -318,6 +317,10 @@ app.get('/user-data', isAuthenticated, async (req, res) => {
         console.error('Error fetching user data:', error);
         res.status(500).send('Error fetching user data');
     }
+});
+
+app.get('/onboard', isAuthenticated, async (req, res) => {
+
 });
 
 app.get('/logout', (req, res) => {

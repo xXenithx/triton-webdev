@@ -12,6 +12,7 @@
         <p><strong>Full Name:</strong> <span id="fullName"></span></p>
         <p><strong>Email:</strong> <span id="email"></span></p>
         <p><strong>Email Verified:</strong> <span id="emailVerified"></span></p>
+        <button onclick="addDevice()">Add New Device</button>
         <button onclick="logout()">Logout</button>
     </div>
 
@@ -28,6 +29,12 @@
         // Logout function
         function logout() {
             window.location.href = '/logout';
+        }
+
+        // Start onboarding process for a new device
+        function addDevice() {
+            // Redirect to the device onboarding page
+            window.location.href = '/onboard-device';
         }
     </script>
 </body>
