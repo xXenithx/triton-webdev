@@ -45,4 +45,15 @@ export const getLogoutPage = (req, res) => {
     });
 }
 
+export const getDashboardPage = (req, res) => {
+    // Check if the user is logged in
+    if (req.session && req.session.user) {
+        // Render the dashboard page
+        res.sendFile(path.join(__dirname, '../../public/dashboard.html'));
+    } else {
+        // If not logged in, redirect to the home page
+        res.redirect('/');
+    }
+}
+
 //////////////////////////// POST Routes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
