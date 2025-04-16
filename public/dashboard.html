@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+    <div class="dashboard">
+        <h2>Welcome to your Dashboard</h2>
+        <p><strong>Full Name:</strong> <span id="fullName"></span></p>
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>Email Verified:</strong> <span id="emailVerified"></span></p>
+        <button onclick="addDevice()">Add New Device</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        // Fetch user data from the server
+        fetch('/user-data')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('fullName').innerText = data.fullName;
+                document.getElementById('email').innerText = data.email;
+                document.getElementById('emailVerified').innerText = data.emailVerified ? 'Yes' : 'No';
+            });
+
+        // Logout function
+        function logout() {
+            window.location.href = '/logout';
+        }
+
+        // Start onboarding process for a new device
+        function addDevice() {
+            // Redirect to the device onboarding page
+            window.location.href = '/onboard-device';
+        }
+    </script>
+</body>
+
+</html>

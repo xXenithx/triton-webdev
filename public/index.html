@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Particle.IO Project Login Page</title>
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+  <div class="log-form">
+    <h2>Login to your account</h2>
+    <form action="/login" method="POST">
+      <input type="email" placeholder="Email" name="email" required>
+      <input type="password" placeholder="Password" name="password" required>
+      <button type="submit" class="btn">Login</button>
+      <a class="forgot" href="/forgot-password">Forgot Password?</a>
+    </form>
+    <button onclick="window.location.href='/auth/google'" class="btn">Login with Google</button>
+    <p>Don't have an account? <a href="/signup">Create one here</a></p>
+    <div id="error-message" style="color: red;">
+      <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorMessage = urlParams.get('error');
+        if (errorMessage) {
+          document.getElementById('error-message').innerText = errorMessage;
+        }
+      </script>
+    </div>
+  </div>
+</body>
+
+</html>
