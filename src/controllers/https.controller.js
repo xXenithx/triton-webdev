@@ -7,13 +7,10 @@ const __dirname = path.dirname(__filename);
 
 //////////////////////////// GET Routes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 export const getHomePage = (req, res) => {
-    // Debug: Print to the console information about the request
-    console.log("\nIncoming request from: " + req.remoteAddress);
-
     // Check to see if the request has an existing session
     if (req.session && req.session.user){
-        // If the user is already logged in, redirect to the home page
-        res.redirect('/home');
+        // If the user is already logged in, redirect to the dashboard page
+        res.redirect('/dashboard');
     } else {
         // If the user is not logged in, render the login page
         res.sendFile(path.join(__dirname, '../../public/index.html'));
@@ -40,7 +37,7 @@ export const getLogoutPage = (req, res) => {
             res.status(500).send('Internal Server Error');
         } else {
             res.clearCookie('connect.sid'); // Clear the session cookie
-            res.redirect('/');
+            res.redirect('/home');
         }
     });
 }
@@ -52,7 +49,7 @@ export const getDashboardPage = (req, res) => {
         res.sendFile(path.join(__dirname, '../../public/dashboard.html'));
     } else {
         // If not logged in, redirect to the home page
-        res.redirect('/');
+        res.redirect('/home');
     }
 }
 

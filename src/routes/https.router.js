@@ -5,13 +5,11 @@ import * as userModel from '../models/user.model.js';
 const router = express.Router();
 
 //////////////Web API Routes\\\\\\\\\\\\\\\\\\\\
-
-
 // GET Routes
-router.get('/', httpsController.getHomePage);
+router.get('/home', httpsController.getHomePage);
 router.get('/signup', httpsController.getSignUpPage);
 router.get('/forgot-password', httpsController.getFogotPasswordPage);
-router.get('/dashboard', httpsController.getDashboardPage);
+router.get('/dashboard', isAuthenticated, httpsController.getDashboardPage);
 router.get('/user-data', isAuthenticated, async (req, res) => {
     try {
         //Fetch user data from Firestore using the user ID from the session

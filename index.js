@@ -42,12 +42,12 @@ app.use(session({
     saveUninitialized: true,
     cookie: {
         secure: true, // Set to true if using HTTPS
-        maxAge: 60000 // 1 minute
+        maxAge: 1000 * 60 * 60 * 24 // 1 day
     }
 }));
 
 // Initialize custom middlewares
-app.use(debugMiddleware);
+// app.use(debugMiddleware);
 
 // Initialize routes
 app.use('/', httpsRouter);
