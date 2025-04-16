@@ -15,6 +15,7 @@ import debugMiddleware from './src/middlewares/debug.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Create an Express application and set the port
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -23,11 +24,14 @@ const key = fs.readFileSync(path.join(__dirname, 'certs/key.pem'));
 const cert = fs.readFileSync(path.join(__dirname, 'certs/cert.pem'));
 const credentials = { key, cert };
 
+// Middleware to parse JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Middleware to parse cookies
 app.use(cookieParser());
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
+// Middleware to handle sessions
 app.use(session({
     secret: process.env.SECRET_KEY,
     resave: false,
@@ -43,10 +47,6 @@ app.use(debugMiddleware);
 
 // Initialize routes
 app.use('/', router);
-
-// app.get('/', (req, res) => {
-//     res.json('Welcome to the Particle API!');
-// });
 
 // Start the HTTPS server
 https.createServer(credentials, app).listen(PORT, () => {

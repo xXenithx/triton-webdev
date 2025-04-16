@@ -1,14 +1,14 @@
 import express from 'express';
-import { getHomePage, getSignUpPage, getFogotPasswordPage} from '../controllers/https.controller.js'; 
+import * as httpsController from '../controllers/https.controller.js'; 
 const router = express.Router();
 
-//Web API Routes//
+//////////////Web API Routes\\\\\\\\\\\\\\\\\\\\
 
 
 // GET Routes
-router.get('/', getHomePage);
-router.get('/signup', getSignUpPage);
-router.get('/forgot-password', getFogotPasswordPage);
+router.get('/', httpsController.getHomePage);
+router.get('/signup', httpsController.getSignUpPage);
+router.get('/forgot-password', httpsController.getFogotPasswordPage);
 // POST Routes
 
 // PUT Routes
